@@ -1,0 +1,62 @@
+---
+- name: Installation de rsync
+  apt:
+    name: rsync
+    state: present
+
+- name: Créer le répertoire /home/iris
+  file:
+    path: /home/iris
+    state: directory
+    owner: yan  # Utilisateur administrateur existant
+    group: docker
+    mode: '0755'
+
+- name: Créer le répertoire docker
+  file:
+    path: /home/iris/admin
+    state: directory
+    owner: yan
+    group: docker
+    mode: '0755'
+
+# Copie de tous les fichiers du dossier docker
+- name: Copier les fichiers docker
+  copy:
+    src: "{{ role_path }}/docker/"
+    dest: "/home/iris/admin/"
+    owner: yan
+    group: docker
+    directory_mode: yes
+  ignore_errors: yes
+
+# Configuration du fichier .env avec le nom de domaine
+- name: Mettre à jour le fichier .env avec le nom de domaine
+  lineinfile:
+    path: /home/iris/admin/.env
+    regexp: '^DOMAIN_NAME='
+    line: 'DOMAIN_NAME="{{ inventory_hostname }}"'
+    create: yes
+    owner: yan
+    group: docker
+    mode: '0644'
+
+# S'assurer que acme.json a les bonnes permissions
+- name: Définir les permissions pour acme.json
+  file:
+    path: /home/iris/admin/systeme/traefik_data/acme.json
+    owner: yan
+    group: docker
+    mode: '0600'
+  ignore_errors: yes
+
+# Exécuter docker-compose
+- name: Démarrer les services avec docker-compose
+  shell: cd /home/iris/admin && docker compose up -d
+  register: docker_output
+  ignore_errors: yes
+
+- name: Afficher la sortie de docker-compose
+  debug:
+    var: docker_output
+    verbosity: 1

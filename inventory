@@ -1,0 +1,5 @@
+[dev_server]
+iris ansible_user=julien ansible_host=192.168.100.20 ssh_private_key_file=/home/julien/.ssh/mediaschool
+
+[all:vars]
+ansible_python_interpreter=/usr/bin/python3
