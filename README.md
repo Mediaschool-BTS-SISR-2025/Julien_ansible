@@ -1,6 +1,6 @@
 # Template Ansible pour BTS SIO
 
-Ce projet est un template Ansible destiné aux étudiants de BTS SIO pour automatiser le déploiement et la configuration de serveurs de développement. Il permet de mettre en place rapidement un environnement complet incluant des utilisateurs, Docker, un pare-feu et divers outils.
+Ce projet est un template Ansible destiné à mettre en place un reverse-proxy (Traefik) dans le cadre de la configuration du serveur.
 
 ## Prérequis
 
@@ -193,3 +193,13 @@ sudo iptables -L -v
 ---
 
 Ce template est conçu pour être un point de départ pour vos projets. N'hésitez pas à le personnaliser selon vos besoins spécifiques.
+<<<<<<< HEAD
+=======
+
+### Ports
+Les ports utilisés: 80 pour http / 443 pour https
+J'ai eu besoin du port 8080 pour accéder au dashboard traefik. De plus, pour passer par portainer il y a besoin du port 9443.
+
+### Ce que dois faire mon script:
+Lancer Traefik grâce notamment aux fichier toml, docker-compose.
+>>>>>>> 9475f0a (MAJ Julien_ansible)
