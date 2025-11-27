@@ -195,7 +195,7 @@ sudo iptables -L -v
 Ce template est conçu pour être un point de départ pour vos projets. N'hésitez pas à le personnaliser selon vos besoins spécifiques.
 
 ### Ports
-Les ports utilisés: 80 pour http / 443 pour https
+Les ports utilisés: 80 pour http / 443 pour https.
 J'ai eu besoin du port 8080 pour accéder au dashboard traefik. De plus, pour passer par portainer il y a besoin du port 9443.
 
 ### Ce que dois faire mon script:
